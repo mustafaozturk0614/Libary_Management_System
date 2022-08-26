@@ -17,10 +17,14 @@ public class Address {
 	@ManyToOne
 	private UserInformation userInformation;
 
-	public Address(String address, UserInformation userInformation) {
+	public Address(String address) {
 		super();
 		this.address = address;
-		this.userInformation = userInformation;
+
+	}
+
+	public Address() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

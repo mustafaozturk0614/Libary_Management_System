@@ -15,10 +15,14 @@ public class PhoneNumber {
 	@ManyToOne
 	private UserInformation userInformation;
 
-	public PhoneNumber(String phoneNumber, UserInformation userInformation) {
+	public PhoneNumber(String phoneNumber) {
 		super();
 		this.phoneNumber = phoneNumber;
-		this.userInformation = userInformation;
+
+	}
+
+	public PhoneNumber() {
+
 	}
 
 	public Long getId() {

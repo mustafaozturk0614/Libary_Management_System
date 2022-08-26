@@ -1,21 +1,25 @@
 package com.bilgeadam.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tbl_user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-
 	private String username;
-
 	private String password;
-	@OneToOne(mappedBy = "user")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_information_id", referencedColumnName = "id", unique = true)
 	private UserInformation userInformation;
 
 	public User(String username, String password, UserInformation userInformation) {
@@ -23,6 +27,10 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.userInformation = userInformation;
+	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

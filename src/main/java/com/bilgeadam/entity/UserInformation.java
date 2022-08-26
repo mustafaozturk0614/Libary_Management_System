@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,23 +20,30 @@ public class UserInformation {
 	private String name;
 	private String surName;
 	private String email;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInformation")
 	private List<PhoneNumber> phoneNumbers;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInformation")
 	private List<Address> address;
 
-	@OneToOne(mappedBy = "userInformation")
+	@OneToOne()
+	@JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
 	private User user;
 
 	public UserInformation(String name, String surName, String email, List<PhoneNumber> phoneNumbers,
-			List<Address> address, User user) {
+			List<Address> address) {
 		super();
 		this.name = name;
 		this.surName = surName;
 		this.email = email;
 		this.phoneNumbers = phoneNumbers;
 		this.address = address;
-		this.user = user;
+
+	}
+
+	public UserInformation() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public long getId() {
