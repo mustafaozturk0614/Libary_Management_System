@@ -4,16 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class PhoneNumber {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String phoneNumber;
-	@ManyToOne
-	private UserInformation userInformation;
+
+//	@ManyToOne
+//	private UserInformation userInformation;
 
 	public PhoneNumber(String phoneNumber) {
 		super();
@@ -41,17 +41,9 @@ public class PhoneNumber {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public UserInformation getUserInformation() {
-		return userInformation;
-	}
-
-	public void setUserInformation(UserInformation userInformation) {
-		this.userInformation = userInformation;
-	}
-
 	@Override
 	public String toString() {
-		return "PhoneNumber [id=" + id + ", phoneNumber=" + phoneNumber + ", userInformation=" + userInformation + "]";
+		return "PhoneNumber [id=" + id + ", phoneNumber=" + phoneNumber + "]";
 	}
 
 }

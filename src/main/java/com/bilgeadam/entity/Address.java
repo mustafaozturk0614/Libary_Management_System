@@ -4,23 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String address;
 
-	@ManyToOne
-	private UserInformation userInformation;
+//	@ManyToOne
+//	private UserInformation userInformation;
 
 	public Address(String address) {
 		super();
 		this.address = address;
-
 	}
 
 	public Address() {
@@ -43,17 +41,9 @@ public class Address {
 		this.address = address;
 	}
 
-	public UserInformation getUserInformation() {
-		return userInformation;
-	}
-
-	public void setUserInformation(UserInformation userInformation) {
-		this.userInformation = userInformation;
-	}
-
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", address=" + address + ", userInformation=" + userInformation + "]";
+		return "Address [id=" + id + ", address=" + address + "]";
 	}
 
 }

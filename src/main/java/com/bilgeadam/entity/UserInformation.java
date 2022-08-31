@@ -1,5 +1,6 @@
 package com.bilgeadam.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,18 +15,20 @@ import javax.persistence.OneToOne;
 @Entity
 public class UserInformation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String name;
 	private String surName;
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInformation")
-	private List<PhoneNumber> phoneNumbers;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "u_information_id")
+	private List<PhoneNumber> phoneNumbers = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInformation")
-	private List<Address> address;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "u_information_id")
+	private List<Address> address = new ArrayList<>();
 
 	@OneToOne()
 	@JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)

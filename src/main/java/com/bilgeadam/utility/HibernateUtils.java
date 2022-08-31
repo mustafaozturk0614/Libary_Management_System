@@ -4,7 +4,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.bilgeadam.entity.Address;
+import com.bilgeadam.entity.Employee;
 import com.bilgeadam.entity.PhoneNumber;
+import com.bilgeadam.entity.Student;
 import com.bilgeadam.entity.User;
 import com.bilgeadam.entity.UserInformation;
 
@@ -23,6 +25,8 @@ public class HibernateUtils {
 			configuration.addAnnotatedClass(UserInformation.class);
 			configuration.addAnnotatedClass(PhoneNumber.class);
 			configuration.addAnnotatedClass(Address.class);
+			configuration.addAnnotatedClass(Student.class);
+			configuration.addAnnotatedClass(Employee.class);
 
 			SessionFactory factory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 
