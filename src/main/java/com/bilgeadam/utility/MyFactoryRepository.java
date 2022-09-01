@@ -21,6 +21,46 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 	org.hibernate.Transaction transaction;
 	private T t;
 
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public CriteriaBuilder getCriteriaBuilder() {
+		return criteriaBuilder;
+	}
+
+	public void setCriteriaBuilder(CriteriaBuilder criteriaBuilder) {
+		this.criteriaBuilder = criteriaBuilder;
+	}
+
+	public org.hibernate.Transaction getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(org.hibernate.Transaction transaction) {
+		this.transaction = transaction;
+	}
+
+	public T getT() {
+		return t;
+	}
+
+	public void setT(T t) {
+		this.t = t;
+	}
+
 	public MyFactoryRepository(T t) {
 		entityManager = HibernateUtils.getSessionFactory().createEntityManager();
 		criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -52,10 +92,12 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 			openSession();
 			session.save(entity);
 			closeSuccessSession();
+			System.out.println("Kayýt iþlemi Baþarýlý");
 			return entity;
 		} catch (Exception e) {
 			e.printStackTrace();
 			closeErrorSession();
+			System.out.println("Kayýt iþlemi Baþarýsýz");
 		}
 		return null;
 	}

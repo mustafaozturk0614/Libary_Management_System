@@ -4,6 +4,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.bilgeadam.entity.Address;
+import com.bilgeadam.entity.Author;
+import com.bilgeadam.entity.Book;
+import com.bilgeadam.entity.Borrow;
+import com.bilgeadam.entity.Debt;
 import com.bilgeadam.entity.Employee;
 import com.bilgeadam.entity.PhoneNumber;
 import com.bilgeadam.entity.Student;
@@ -27,6 +31,10 @@ public class HibernateUtils {
 			configuration.addAnnotatedClass(Address.class);
 			configuration.addAnnotatedClass(Student.class);
 			configuration.addAnnotatedClass(Employee.class);
+			configuration.addAnnotatedClass(Book.class);
+			configuration.addAnnotatedClass(Author.class);
+			configuration.addAnnotatedClass(Borrow.class);
+			configuration.addAnnotatedClass(Debt.class);
 
 			SessionFactory factory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 

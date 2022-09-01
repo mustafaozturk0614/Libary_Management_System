@@ -14,13 +14,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_user")
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
+
 	private String username;
 	private String password;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_information_id", referencedColumnName = "id", unique = true)
 	private UserInformation userInformation;
@@ -30,6 +32,12 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.userInformation = userInformation;
+	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public User() {

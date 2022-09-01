@@ -43,6 +43,15 @@ public class Borrow {
 		this.retunDate = retunDate;
 	}
 
+	public Borrow(Date borrowDate, Student student, Book book, Date retunDate, DelayStatus delayStatus) {
+		super();
+		this.borrowDate = borrowDate;
+		this.student = student;
+		this.book = book;
+		this.retunDate = retunDate;
+		this.delayStatus = delayStatus;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -83,10 +92,18 @@ public class Borrow {
 		this.retunDate = retunDate;
 	}
 
+	public DelayStatus getDelayStatus() {
+		return delayStatus;
+	}
+
+	public void setDelayStatus(DelayStatus delayStatus) {
+		this.delayStatus = delayStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Borrow [id=" + id + ", borrowDate=" + borrowDate + ", student=" + student + ", book=" + book
-				+ ", retunDate=" + retunDate + "]";
+				+ ", retunDate=" + retunDate + "delayStatus" + delayStatus + "]";
 	}
 
 }

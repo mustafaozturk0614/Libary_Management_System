@@ -45,6 +45,14 @@ public class UserInformation {
 
 	}
 
+	public UserInformation(String name, String surName, String email, User user) {
+		super();
+		this.name = name;
+		this.surName = surName;
+		this.email = email;
+		this.user = user;
+	}
+
 	public UserInformation() {
 		// TODO Auto-generated constructor stub
 	}

@@ -3,7 +3,6 @@ package com.bilgeadam.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,7 +14,8 @@ public class Student extends User {
 	@Enumerated(EnumType.STRING)
 	private UserType userType = UserType.STUDENT;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	@OneToMany(mappedBy = "student")
+
 	List<Borrow> borrows = new ArrayList<>();
 
 	public Student() {
@@ -25,6 +25,11 @@ public class Student extends User {
 
 	public Student(String username, String password, UserInformation userInformation) {
 		super(username, password, userInformation);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Student(String username, String password) {
+		super(username, password);
 		// TODO Auto-generated constructor stub
 	}
 
