@@ -21,4 +21,16 @@ public class AddressController {
 		return addressService.save(new Address(address));
 	}
 
+	public Address findById(Long id) {
+
+		return addressService.findById(id).get();
+
+	}
+
+	public void deletedById(Long id) {
+
+		addressService.deleteById(id);
+
+	}
+
 }

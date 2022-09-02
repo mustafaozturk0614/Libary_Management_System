@@ -1,53 +1,37 @@
 package com.bilgeadam.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Student extends User {
 
-	@Enumerated(EnumType.STRING)
-	private UserType userType = UserType.STUDENT;
-
-	@OneToMany(mappedBy = "student")
-
-	List<Borrow> borrows = new ArrayList<>();
+//	@OneToMany(mappedBy = "student")
+//	List<Borrow> borrows = new ArrayList<>();
 
 	public Student() {
 		super();
+		setUserType(UserType.STUDENT);
+
 		// TODO Auto-generated constructor stub
 	}
 
 	public Student(String username, String password, UserInformation userInformation) {
 		super(username, password, userInformation);
-		// TODO Auto-generated constructor stub
+		setUserType(UserType.STUDENT);
 	}
 
 	public Student(String username, String password) {
 		super(username, password);
-		// TODO Auto-generated constructor stub
+		setUserType(UserType.STUDENT);
 	}
 
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-
-	public List<Borrow> getBorrows() {
-		return borrows;
-	}
-
-	public void setBorrows(List<Borrow> borrows) {
-		this.borrows = borrows;
-	}
+//	public List<Borrow> getBorrows() {
+//		return borrows;
+//	}
+//
+//	public void setBorrows(List<Borrow> borrows) {
+//		this.borrows = borrows;
+//	}
 
 	@Override
 	public String toString() {

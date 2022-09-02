@@ -1,6 +1,6 @@
 package com.bilgeadam.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Borrow {
@@ -20,8 +18,7 @@ public class Borrow {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	@Temporal(TemporalType.DATE)
-	Date borrowDate;
+	LocalDate borrowDate;
 
 	@ManyToOne
 	Student student;
@@ -29,27 +26,30 @@ public class Borrow {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	Book book;
 
-	@Temporal(TemporalType.DATE)
-	Date retunDate;
+	LocalDate retunDate;
 
 	@Enumerated(EnumType.STRING)
 	DelayStatus delayStatus;
 
-	public Borrow(Date borrowDate, Student student, Book book, Date retunDate) {
+	public Borrow(LocalDate borrowDate, Student student, Book book, LocalDate retunDate) {
 		super();
 		this.borrowDate = borrowDate;
-		this.student = student;
+//		this.student = student;
 		this.book = book;
 		this.retunDate = retunDate;
 	}
 
-	public Borrow(Date borrowDate, Student student, Book book, Date retunDate, DelayStatus delayStatus) {
+	public Borrow(LocalDate borrowDate, Student student, Book book, LocalDate retunDate, DelayStatus delayStatus) {
 		super();
 		this.borrowDate = borrowDate;
-		this.student = student;
+//		this.student = student;
 		this.book = book;
 		this.retunDate = retunDate;
 		this.delayStatus = delayStatus;
+	}
+
+	public Borrow() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -60,11 +60,11 @@ public class Borrow {
 		this.id = id;
 	}
 
-	public Date getBorrowDate() {
+	public LocalDate getBorrowDate() {
 		return borrowDate;
 	}
 
-	public void setBorrowDate(Date borrowDate) {
+	public void setBorrowDate(LocalDate borrowDate) {
 		this.borrowDate = borrowDate;
 	}
 
@@ -84,11 +84,11 @@ public class Borrow {
 		this.book = book;
 	}
 
-	public Date getRetunDate() {
+	public LocalDate getRetunDate() {
 		return retunDate;
 	}
 
-	public void setRetunDate(Date retunDate) {
+	public void setRetunDate(LocalDate retunDate) {
 		this.retunDate = retunDate;
 	}
 
@@ -102,8 +102,8 @@ public class Borrow {
 
 	@Override
 	public String toString() {
-		return "Borrow [id=" + id + ", borrowDate=" + borrowDate + ", student=" + student + ", book=" + book
-				+ ", retunDate=" + retunDate + "delayStatus" + delayStatus + "]";
+		return "Borrow [id=" + id + ", borrowDate=" + borrowDate + ", student=" + ", book=" + book + ", retunDate="
+				+ retunDate + "delayStatus" + delayStatus + "]";
 	}
 
 }

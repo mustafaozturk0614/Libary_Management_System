@@ -22,4 +22,15 @@ public class PhoneNumberController {
 		return phoneNumberService.save(new PhoneNumber(phoneNumber));
 	}
 
+	public PhoneNumber findById(Long id) {
+
+		return phoneNumberService.findById(id).get();
+
+	}
+
+	public void deletedById(Long id) {
+
+		phoneNumberService.deleteById(id);
+
+	}
 }

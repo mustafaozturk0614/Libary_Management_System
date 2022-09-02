@@ -4,15 +4,18 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import com.bilgeadam.entity.User;
+import com.bilgeadam.service.UserInformationService;
 import com.bilgeadam.service.UserService;
 
 public class UserController {
 
 	UserService userService;
+	UserInformationService userInformationService;
 	Scanner scanner = new Scanner(System.in);
 
 	public UserController() {
 		this.userService = new UserService();
+		this.userInformationService = new UserInformationService();
 	}
 
 	public User ceateUser() {
@@ -31,4 +34,14 @@ public class UserController {
 
 	}
 
+	public User findById(Long id) {
+
+		return userService.findById(id).get();
+
+	}
+
+	public void deleteById(Long id) {
+
+		userService.deleteById(id);
+	}
 }

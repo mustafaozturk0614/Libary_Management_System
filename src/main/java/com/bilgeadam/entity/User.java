@@ -2,6 +2,8 @@ package com.bilgeadam.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,13 +20,17 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String username;
 	private String password;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_information_id", referencedColumnName = "id", unique = true)
+
+	@Enumerated(EnumType.STRING)
+	private UserType userType;
+
+	@OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_information_id", referencedColumnName = "id")
 	private UserInformation userInformation;
 
 	public User(String username, String password, UserInformation userInformation) {
@@ -74,6 +80,14 @@ public class User {
 
 	public void setUserInformation(UserInformation userInformation) {
 		this.userInformation = userInformation;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	@Override

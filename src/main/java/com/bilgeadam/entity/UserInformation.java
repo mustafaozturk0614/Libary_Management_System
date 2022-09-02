@@ -31,7 +31,7 @@ public class UserInformation {
 	private List<Address> address = new ArrayList<>();
 
 	@OneToOne()
-	@JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
 	public UserInformation(String name, String surName, String email, List<PhoneNumber> phoneNumbers,
@@ -116,7 +116,7 @@ public class UserInformation {
 	@Override
 	public String toString() {
 		return "UserInformation [id=" + id + ", name=" + name + ", surName=" + surName + ", email=" + email
-				+ ", phoneNumbers=" + phoneNumbers + ", address=" + address + ", user=" + user + "]";
+				+ ", phoneNumbers=" + ", user=" + "]";
 	}
 
 }

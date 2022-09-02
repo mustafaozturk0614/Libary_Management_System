@@ -57,4 +57,10 @@ public class MyFactoryService<R extends MyFactoryRepository, T, ID> implements I
 		return repository.findByEntity(entity);
 	}
 
+	@Override
+	public void update(T t) {
+		repository.update(t);
+
+	}
+
 }

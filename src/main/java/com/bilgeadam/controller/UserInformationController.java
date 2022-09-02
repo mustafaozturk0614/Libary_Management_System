@@ -60,4 +60,15 @@ public class UserInformationController {
 
 	}
 
+	public UserInformation findById(Long id) {
+
+		return userInformationService.findById(id).get();
+
+	}
+
+	public void deleteById(Long id) {
+
+		userInformationService.deleteById(id);
+	}
+
 }

@@ -1,6 +1,10 @@
 package com.bilgeadam.controller;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+
+import javax.transaction.Transactional;
 
 import com.bilgeadam.entity.Student;
 import com.bilgeadam.entity.UserInformation;
@@ -30,6 +34,41 @@ public class StudentController {
 		userInformation.setUser(user);
 		return studentService.save(user);
 
+	}
+
+	public List<Student> findAll() {
+
+		return studentService.findAll();
+
+	}
+
+	public Student findById(Long id) {
+
+		return studentService.findById(id).get();
+
+	}
+
+	public void updateStudent() {
+		System.out.println("Güncellemek istediðiniz Ogrenci Ýd sini giriniz");
+		Optional<Student> student = studentService.findById(Long.parseLong(scanner.nextLine()));
+
+		if (student.isPresent()) {
+			System.out.println("Güncellemek istediðiniz kullanýcý ismini giriniz");
+			student.get().setUsername(scanner.nextLine());
+			System.out.println("Güncellemek istediðiniz þifreyi giriniz");
+			student.get().setPassword(scanner.nextLine());
+
+			studentService.update(student.get());
+		} else {
+			System.out.println("kullanýcý bulunamadý");
+		}
+
+	}
+
+	@Transactional
+	public void deleteById(Long id) {
+
+		studentService.deleteById(id);
 	}
 
 }

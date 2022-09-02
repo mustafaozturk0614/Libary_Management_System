@@ -23,4 +23,6 @@ public interface ICrud<T, ID> extends IRepository<T, ID> {
 
 	List<T> findByEntity(T entity);
 
+	void update(T t);
+
 }

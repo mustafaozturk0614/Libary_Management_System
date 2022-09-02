@@ -87,6 +87,20 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 	}
 
 	@Override
+	public void update(T t) {
+		try {
+			openSession();
+
+			session.merge(t);
+			closeSuccessSession();
+
+		} catch (Exception e) {
+			closeErrorSession();
+		}
+
+	}
+
+	@Override
 	public <S extends T> S save(S entity) {
 		try {
 			openSession();
@@ -130,8 +144,10 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 			deleteEntitiy = findById(id);
 
 			if (deleteEntitiy.isPresent()) {
+				System.out.println("1" + deleteEntitiy);
 				openSession();
-				session.remove(deleteEntitiy.get());
+				session.delete(deleteEntitiy.get());
+				System.out.println("2" + deleteEntitiy);
 				closeSuccessSession();
 			} else {
 
@@ -156,13 +172,15 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 		Root<T> root = (Root<T>) criteria.from(t.getClass());
 		criteria.select(root);
 		criteria.where(criteriaBuilder.equal(root.get("id"), id));
-
+		T result = null;
 		try {
-			T result = entityManager.createQuery(criteria).getSingleResult();
-			return Optional.of(result);
+			result = entityManager.createQuery(criteria).getSingleResult();
+
+			closeSuccessSession();
 		} catch (Exception e) {
-			return Optional.ofNullable(null);
+
 		}
+		return Optional.ofNullable(result);
 
 	}
 
