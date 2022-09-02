@@ -52,6 +52,13 @@ public class Borrow {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Borrow(LocalDate borrowDate, Book book, LocalDate retunDate) {
+		super();
+		this.borrowDate = borrowDate;
+		this.book = book;
+		this.retunDate = retunDate;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -90,7 +90,6 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 	public void update(T t) {
 		try {
 			openSession();
-
 			session.merge(t);
 			closeSuccessSession();
 
@@ -228,20 +227,20 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
 		Field[] fl = cl.getDeclaredFields();
 
 		try {
-			CriteriaQuery<T> criteria = (CriteriaQuery<T>) criteriaBuilder.createQuery(t.getClass());
-			Root<T> root = (Root<T>) criteria.from(t.getClass());
+			CriteriaQuery<T> criteria = (CriteriaQuery<T>) criteriaBuilder.createQuery(entity.getClass());
+			Root<T> root = (Root<T>) criteria.from(entity.getClass());
 			List<Predicate> list = new ArrayList<Predicate>();
 			for (int i = 0; i < fl.length; i++) {
 				// reflaction ile eriþtiðimiz alanlar eriþebilir olamalý
 
 				fl[i].setAccessible(true);
-				if (fl[i].get(t) != null && !fl[i].getName().equals("id")) {
+				if (fl[i].get(entity) != null && !fl[i].getName().equals("id")) {
 					if (fl[i].getType().isAssignableFrom(String.class)) {// String kontrolu
 
-						list.add(criteriaBuilder.like(root.get(fl[i].getName()), "%" + fl[i].get(t) + "%"));
+						list.add(criteriaBuilder.like(root.get(fl[i].getName()), "%" + fl[i].get(entity) + "%"));
 
 					} else {
-						list.add(criteriaBuilder.equal(root.get(fl[i].getName()), fl[i].get(t)));
+						list.add(criteriaBuilder.equal(root.get(fl[i].getName()), fl[i].get(entity)));
 					}
 
 				}

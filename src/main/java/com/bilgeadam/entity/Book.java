@@ -34,6 +34,21 @@ public class Book {
 		this.isBorrowed = isBorrowed;
 	}
 
+	public Book(String title, Author author) {
+		super();
+		this.title = title;
+		this.author = author;
+	}
+
+	public Book(String title) {
+		super();
+		this.title = title;
+	}
+
+	public Book() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

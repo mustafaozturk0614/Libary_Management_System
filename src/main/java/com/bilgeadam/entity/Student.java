@@ -1,12 +1,16 @@
 package com.bilgeadam.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Student extends User {
 
-//	@OneToMany(mappedBy = "student")
-//	List<Borrow> borrows = new ArrayList<>();
+	@OneToMany(mappedBy = "student")
+	List<Borrow> borrows = new ArrayList<>();
 
 	public Student() {
 		super();
@@ -25,13 +29,14 @@ public class Student extends User {
 		setUserType(UserType.STUDENT);
 	}
 
-//	public List<Borrow> getBorrows() {
-//		return borrows;
-//	}
 //
-//	public void setBorrows(List<Borrow> borrows) {
-//		this.borrows = borrows;
-//	}
+	public List<Borrow> getBorrows() {
+		return borrows;
+	}
+
+	public void setBorrows(List<Borrow> borrows) {
+		this.borrows = borrows;
+	}
 
 	@Override
 	public String toString() {

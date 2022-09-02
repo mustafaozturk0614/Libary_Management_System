@@ -5,9 +5,12 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import com.bilgeadam.controller.BookController;
+import com.bilgeadam.controller.BorrowController;
 import com.bilgeadam.controller.UserController;
+import com.bilgeadam.entity.Student;
 import com.bilgeadam.entity.User;
 import com.bilgeadam.entity.UserType;
+import com.bilgeadam.service.StudentService;
 import com.bilgeadam.service.UserService;
 
 /*
@@ -25,8 +28,10 @@ public class LibaryManagementSystemMenu {
 	Scanner scanner = new Scanner(System.in);
 
 	UserService userService = new UserService();
+	StudentService studentService = new StudentService();
 	UserController userController = new UserController();
-	BookController bookController=new BookController()
+	BookController bookController = new BookController();
+	BorrowController borrowController = new BorrowController();
 
 	public void mainMenu() {
 		int input = 2;
@@ -81,17 +86,17 @@ public class LibaryManagementSystemMenu {
 		if (user.isPresent()) {
 			if (user.get().getUserType().equals(UserType.STUDENT)) {
 
-				studentMenu();
+				studentMenu(studentService.findById(user.get().getId()).get());
 
 			} else if (user.get().getUserType().equals(UserType.EMPLOYEE)) {
-				employeeMenu();
+				employeeMenu(user.get());
 			}
 
 		}
 
 	}
 
-	public void studentMenu() {
+	public void studentMenu(Student user) {
 
 		int input = 0;
 		do {
@@ -105,7 +110,10 @@ public class LibaryManagementSystemMenu {
 
 			switch (input) {
 			case 1:
-
+				bookController.findNotBorrowBooks().forEach(s -> System.out.println(s.getId() + "-" + s.getTitle()));
+				System.out.println("Lütfen ödünç alacaðýnýz kitap id sini giriniz");
+				Long bookId = Long.parseLong(scanner.nextLine());
+				borrowController.borrowBook(user, bookId);
 				break;
 
 			default:
@@ -116,7 +124,7 @@ public class LibaryManagementSystemMenu {
 
 	}
 
-	public void employeeMenu() {
+	public void employeeMenu(User user) {
 		int input = 0;
 		do {
 			System.out.println("1-Kitap Ekle");
@@ -133,7 +141,7 @@ public class LibaryManagementSystemMenu {
 
 			switch (input) {
 			case 1:
-
+				bookController.createBook();
 				break;
 
 			default:
